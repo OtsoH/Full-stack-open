@@ -31,24 +31,24 @@ app.get('/api/persons', (request, response) => {
   })
 })
 
-app.get('/info', (request, response) => {
-    Person.countDocuments({})
+app.get('/info', (request, response, next) => {
+  Person.countDocuments({})
     .then(count => {
       const time = new Date()
       response.send(
         `Phonebook has info for ${count} people<br><br>${time}`
-    )
-  })
-  .catch(error => (next(error)))
+      )
+    })
+    .catch(error => (next(error)))
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
-    Person.findById(request.params.id)
+  Person.findById(request.params.id)
     .then(person => {
       response.json(person)
     })
     .catch(error => next(error))
-  })
+})
 
 
 
@@ -63,24 +63,24 @@ app.post('/api/persons', (request, response, next) => {
   }
 
   Person.findOne({ name: body.name })
-  .then(existingPerson => {
-    if (existingPerson) {
-      return response.status(400).json({
-        error: 'name must be unique'
+    .then(existingPerson => {
+      if (existingPerson) {
+        return response.status(400).json({
+          error: 'name must be unique'
+        })
+      }
+
+      const person = new Person({
+        name: body.name,
+        number: body.number,
       })
-    }
 
-  const person = new Person({
-    name: body.name,
-    number: body.number,
-  })
-
-  person.save().then(savedPerson => {
-    response.json(savedPerson)
-  })
+      person.save().then(savedPerson => {
+        response.json(savedPerson)
+      })
+        .catch(error => next(error))
+    })
     .catch(error => next(error))
-  })
-  .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
@@ -108,7 +108,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
   const id = request.params.id
   Person.findByIdAndDelete(id)
     .then(() => {
-        response.status(204).end()
+      response.status(204).end()
     })
     .catch(error => next(error))
 })

@@ -14,6 +14,7 @@ export default [
     plugins: {
       '@stylistic/js': stylisticJs,
     },
+
     rules: {
       '@stylistic/js/indent': ['error', 2],
       '@stylistic/js/linebreak-style': ['error', 'unix'],
@@ -21,4 +22,7 @@ export default [
       '@stylistic/js/semi': ['error', 'never'],
     },
   },
+  {
+    ignores :['dist/**']
+  }
 ]
