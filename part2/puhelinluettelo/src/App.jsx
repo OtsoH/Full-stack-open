@@ -55,8 +55,12 @@ const App = () => {
       .catch(error => {
         if (error.response.status === 404) {
           setNotification(`Information of ${personObject.name} has already been removed from server`)
+          setPersons(persons.filter(person => person.id !== id))
         }
-        setPersons(persons.filter(person => person.id !== id))
+        else {
+          setNotification(`Error: ${JSON.stringify(error.response.data)}`)
+        }
+
       })
   }
 
@@ -90,6 +94,10 @@ const App = () => {
         setNotification(`Added ${newName}`)
         setNewName('')
         setNewNumber('')
+    })
+    .catch(error => {
+      console.log(error.response.data)
+      setNotification(`Error: ${JSON.stringify(error.response.data)}`)
     })
   }
 

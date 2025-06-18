@@ -3,7 +3,7 @@ const Notification = ({ message }) => {
     return null
   }
 
-    if (message.includes('has already been removed')) {
+    if (message.includes('has already been removed') || message.includes('Error')) {
         return (
         <div className="error">
             {message}
