@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RtYW4iLCJpZCI6IjY4NTlhNWE1MmUzNjE2ZmYxZDU5OGU5YyIsImlhdCI6MTc1MDcwNTYzMH0.G5-3WjR59humPwM8fWgQnkZuw-t2pxRwubzghM_ZYgY
+
+{
+  "title": "New blog post",
+  "author": "Test man",
+  "url": "http://testiiiiiiii.fi",
+  "likes": 15,
+  "userId": "6859a5a52e3616ff1d598e9c"
+}
